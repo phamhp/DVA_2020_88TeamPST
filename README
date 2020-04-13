@@ -8,6 +8,5 @@
 ++ Run cmd: flask run 
 ++ Open browser, enter : localhost:5000
 
-- Push to Heroku:
-++ git push heroku master
-++ Enter https://dva-spring-2020.herokuapp.com/ in the browser to see the latest change
+Test sync with github & heroku
+
