@@ -1,0 +1,121 @@
+<html class="html" lang="en-US"><head>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    <!-- The theme is from W3 School-->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Adjusted Ratings</title>
+    <!-- <link rel="stylesheet" type="text/css" href="style.css"></link>
+     -->
+<head>
+    <style>
+        .selector {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 12px;
+            text-align: left;
+            float: left;
+            font-weight: lighter;
+        }
+        #vizContainer {
+            width: 700px;
+            height: 700px;
+            float: left;
+        }
+        #dataTarget {
+            width: 300px;
+            height: 700px;
+            float: left;
+        }
+        .business {
+            font-size:19px;
+            font-weight: bold;
+        }
+        .stars {
+            font-size:16px;
+            
+        }
+        .checked {
+        color: orange;
+        }
+    </style>
+
+
+    <script type="text/javascript" src="https://public.tableau.com/javascripts/api/tableau-2.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<body>
+<!-- Navbar -->
+<div class="w3-top">
+    <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
+      <a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1" href="javascript:void(0)" onclick="w3_open()"><i class="fa fa-bars"></i></a>
+      <a href="#" class="w3-bar-item w3-button w3-theme-l1">Main Page</a>
+      <!-- <a href="about.html" class="w3-bar-item w3-button w3-hide-small w3-hover-white">About</a> -->
+      <a href="{{ url_for('about') }}" class="w3-bar-item w3-button w3-hide-small w3-hover-white">About</a>
+    </div>
+  </div>
+<!-- Sidebar -->
+<nav class="w3-sidebar w3-bar-block w3-collapse w3-large w3-theme-l5 w3-animate-left" id="mySidebar">
+    <a href="javascript:void(0)" onclick="w3_close()" class="w3-right w3-xlarge w3-padding-large w3-hover-black w3-hide-large" title="Close Menu">
+      <i class="fa fa-remove"></i>
+    </a>
+    <h4 class="w3-bar-item"><b>Select a Category</b></h4>
+    <br>
+        <select id='category' style="font-size:12px;width:200px"> 
+            <option value='All'>All Restaurants</option>
+            <option value="Restaurants, American (New)">Restaurants, American (New)</option>         
+        </select>
+  </nav>
+    <!-- Overlay effect when opening sidebar on small screens -->
+    <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+    <!-- Main Class -->
+    <div class="w3-main" style="margin-left:250px; margin-top:50px">
+    <div id="tableau-container" class="container" style="width:1200px; height:700px;">
+        <div id = 'dataTarget'>
+            <h1 class="w3-text-teal">Top Five Restaurants</h1>
+            <p><span class = "business" id="name1"></span><br>
+                <span class = "stars" id="stars1"></span>
+                <span class="fa fa-star checked"></span>
+            </p>
+
+            <p>
+            <span class = "business" id="name2"></span><br>
+            <span class = "stars" id="stars2"></span>
+            <span class="fa fa-star checked"></span>
+            </p>    
+
+            <p>
+            <span class = "business" id="name3"></span><br>
+            <span class = "stars" id="stars3"></span>
+            <span class="fa fa-star checked"></span>
+            </p>
+
+            <p>
+            <span class = "business" id="name4"></span><br>
+            <span class = "stars" id="stars4"></span>
+            <span class="fa fa-star checked"></span>
+            </p>
+            
+            <p>
+            <span class = "business" id="name5"></span><br>
+            <span class = "stars" id="stars5"></span>
+            <span class="fa fa-star checked"></span>
+            </p>
+
+        </div>
+        <div id="vizContainer"></div>
+        <br>
+        <br>
+        <!-- <p style="padding-left: 10px;" class="source-dashboard">Source: <br><br>
+        Note:
+        </p> -->
+    
+</div>
+</div>
+
+    <!-- <script type="text/javascript" src="interactive.js"></script> -->
+    <script type="text/javascript" src={{url_for('static', filename='interactive.js')}}></script>
+
+</body>
