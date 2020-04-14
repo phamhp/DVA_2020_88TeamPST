@@ -2,9 +2,7 @@
 ++ virtualenv for python.
 ++ pip install -r requirement
 
-- heroku cli (https://devcenter.heroku.com/categories/command-line)
-
-- Test locally before push to heroku by:
+- Test locally before push to git by:
 ++ Run cmd: flask run 
 ++ Open browser, enter : localhost:5000
 
