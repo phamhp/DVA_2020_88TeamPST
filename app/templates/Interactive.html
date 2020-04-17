@@ -30,6 +30,7 @@
         .business {
             font-size:19px;
             font-weight: bold;
+            cursor:pointer;
         }
         .stars {
             font-size:16px;
@@ -37,6 +38,57 @@
         }
         .checked {
         color: orange;
+        }
+        .switch {
+        position: relative;
+        display: inline-block;
+        width: 58px;
+        height: 32px;
+        }
+        .switch input { 
+        opacity: 0;
+        width: 0;
+        height: 0;
+        }
+        .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+        }
+        .slider:before {
+        position: absolute;
+        content: "";
+        height: 25px;
+        width: 25px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+        }
+        input:checked + .slider {
+        background-color: #50C878;
+        }
+        input:focus + .slider {
+        box-shadow: 0 0 1px #50C878;
+        }
+        input:checked + .slider:before {
+        -webkit-transform: translateX(25px);
+        -ms-transform: translateX(25px);
+        transform: translateX(25px);
+        }
+        /* Rounded sliders */
+        .slider.round {
+        border-radius: 30px;
+        }
+        .slider.round:before {
+        border-radius: 50%;
         }
     </style>
 
@@ -46,12 +98,12 @@
 </head>
 
 <body>
+    
 <!-- Navbar -->
 <div class="w3-top">
     <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
       <a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1" href="javascript:void(0)" onclick="w3_open()"><i class="fa fa-bars"></i></a>
       <a href="#" class="w3-bar-item w3-button w3-theme-l1">Main Page</a>
-      <!-- <a href="about.html" class="w3-bar-item w3-button w3-hide-small w3-hover-white">About</a> -->
       <a href="{{ url_for('about') }}" class="w3-bar-item w3-button w3-hide-small w3-hover-white">About</a>
     </div>
   </div>
@@ -61,11 +113,14 @@
       <i class="fa fa-remove"></i>
     </a>
     <h4 class="w3-bar-item"><b>Select a Category</b></h4>
-    <br>
-        <select id='category' style="font-size:12px;width:200px"> 
-            <option value='All'>All Restaurants</option>
-            <option value="Restaurants, American (New)">Restaurants, American (New)</option>         
-        </select>
+        <center><select id='category' style="font-size:12px;width:150px"></select>
+
+    <h5 class="w3-bar-item"><b>View Hidden Gems</b></h5>
+    <label class="switch">
+        <input type="checkbox">
+        <span class="slider round"></span>
+    </label>
+    <p style="font-size: smaller; padding-left: 5px; padding-right: 5px;">Hidden Gems are restaurants that traditional rating scales undervalue. Our advanced rating system has identified these restaurants as having much higher quality than their traditional rating.</p></center>
   </nav>
     <!-- Overlay effect when opening sidebar on small screens -->
     <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
@@ -74,34 +129,39 @@
     <div class="w3-main" style="margin-left:250px; margin-top:50px">
     <div id="tableau-container" class="container" style="width:1200px; height:700px;">
         <div id = 'dataTarget'>
-            <h1 class="w3-text-teal">Top Five Restaurants</h1>
+            <h1 class="w3-text-teal">Top Restaurants</h1>
             <p><span class = "business" id="name1"></span><br>
                 <span class = "stars" id="stars1"></span>
-                <span class="fa fa-star checked"></span>
+
+                <span id="num_reviews1"></span>
             </p>
 
             <p>
             <span class = "business" id="name2"></span><br>
             <span class = "stars" id="stars2"></span>
-            <span class="fa fa-star checked"></span>
+            
+            <span id="num_reviews2"></span>
             </p>    
 
             <p>
             <span class = "business" id="name3"></span><br>
             <span class = "stars" id="stars3"></span>
-            <span class="fa fa-star checked"></span>
+            
+            <span id="num_reviews3"></span>
             </p>
 
             <p>
             <span class = "business" id="name4"></span><br>
             <span class = "stars" id="stars4"></span>
-            <span class="fa fa-star checked"></span>
+            
+            <span id="num_reviews4"></span>
             </p>
             
             <p>
             <span class = "business" id="name5"></span><br>
             <span class = "stars" id="stars5"></span>
-            <span class="fa fa-star checked"></span>
+            
+            <span id="num_reviews5"></span>
             </p>
 
         </div>
@@ -115,7 +175,6 @@
 </div>
 </div>
 
-    <!-- <script type="text/javascript" src="interactive.js"></script> -->
     <script type="text/javascript" src={{url_for('static', filename='interactive.js')}}></script>
 
 </body>

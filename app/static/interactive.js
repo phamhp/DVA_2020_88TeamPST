@@ -7,7 +7,7 @@ document.getElementById("vizContainer").width = width;
 document.getElementById("vizContainer").height = height;
 
 
-var vizList = ["https://public.tableau.com/views/LasVegasMap/Dashboard2?:display_count=y&publish=yes&:origin=viz_share_link"];
+var vizList = ["https://public.tableau.com/views/TallTable/Dashboard1?:display_count=y&publish=yes&:origin=viz_share_link&:toolbar=no"];
 
 var viz,
 vizLen = vizList.length,
@@ -16,7 +16,11 @@ vizDisplay = 0;
 function createViz(vizDisplay) {
 	var vizDiv = document.getElementById("vizContainer"),
 	options = {
-		hideTabs: true
+    hideTabs: true
+    // ,
+    // onFirstInteractive: function () {
+    //   listenToMarksSelection();
+  // }
 	};
 			
 	if (viz) { // If a viz object exists, delete it.
@@ -63,11 +67,12 @@ function cleanData(table) {
 };
 
 // starting data
-finalData = [{"Business Id":"AN0bWhisCf6LN9eHZ7DQ3w","Categories":"Restaurants, Italian","City":"Las Vegas","Document Index (generated)":"60893","Name":"Los Olivos Ristorante","Postal Code":"89121","State":"NV","Latitude":"36.1291778","Longitude":"-115.0924833","Review Count":"102","Stars":"5"},{"Business Id":"7RR1rbyEKKo2G-RACqAfoA","Categories":"Restaurants, Fast Food, Sandwiches, Food Trucks, Hot Dogs, Food, Burgers, Modern European","City":"Las  Vegas","Document Index (generated)":"85873","Name":"King's  Sausage","Postal Code":"89101","State":"NV","Latitude":"36.1697096","Longitude":"-115.1236952","Review Count":"100","Stars":"5"},{"Business Id":"k9b96JXlNewj36ddrce9Jw","Categories":"Restaurants, Farmers Market, Street Vendors, Mexican, Vegan, Food, Tacos, Vegetarian","City":"Las Vegas","Document Index (generated)":"109928","Name":"Garden Grill","Postal Code":"89145","State":"NV","Latitude":"36.1667834","Longitude":"-115.2861968","Review Count":"94","Stars":"5"},{"Business Id":"VONg0lyHm7fUdARWjkkjCQ","Categories":"Restaurants, Mexican","City":"Las Vegas","Document Index (generated)":"4504","Name":"Las Enchiladas Demama","Postal Code":"89119","State":"NV","Latitude":"36.1013621","Longitude":"-115.1203282","Review Count":"66","Stars":"5"},{"Business Id":"wph0jjOIJQ6U3vPMUooM_A","Categories":"Restaurants, Fast Food, American (New)","City":"Las Vegas","Document Index (generated)":"165431","Name":"Chew & Chug","Postal Code":"89109","State":"NV","Latitude":"36.1067731","Longitude":"-115.1721488","Review Count":"44","Stars":"5"},{"Business Id":"prIta4agQiDpUQVY3MliFA","Categories":"Restaurants, Caterers, Event Planning & Services, Personal Chefs","City":"Las Vegas","Document Index (generated)":"48008","Name":"Chef @ Your Home","Postal Code":"89118","State":"NV","Latitude":"36.179696","Longitude":"-115.345235","Review Count":"40","Stars":"5"},{"Business Id":"mC_nDW9tAQwWcHsfvjUAEQ","Categories":"Restaurants, Filipino, Hawaiian","City":"Las Vegas","Document Index (generated)":"93435","Name":"Lefty-J's Island Favorites","Postal Code":"89169","State":"NV","Latitude":"36.1225777","Longitude":"-115.1441707","Review Count":"40","Stars":"5"},{"Business Id":"rWrx9B1L0jCQm-uUmznBVQ","Categories":"Restaurants, Mexican","City":"Las Vegas","Document Index (generated)":"101755","Name":"El Pollito Charro","Postal Code":"89108","State":"NV","Latitude":"36.196362","Longitude":"-115.2351831","Review Count":"40","Stars":"5"},{"Business Id":"KBA0yGsblufetQgs6Sm_nQ","Categories":"Restaurants, Seafood, Mexican","City":"Las Vegas","Document Index (generated)":"97001","Name":"Mariscos 7 Mares Mexican Restaurant","Postal Code":"89104","State":"NV","Latitude":"36.1585441","Longitude":"-115.121042","Review Count":"30","Stars":"5"},{"Business Id":"RVEmagXK4BzWp8Qws25PDw","Categories":"Restaurants, Burgers, Pizza, Italian","City":"Las Vegas","Document Index (generated)":"37710","Name":"Arnie's Pizzeria","Postal Code":"89139","State":"NV","Latitude":"36.0484864","Longitude":"-115.2243463","Review Count":"28","Stars":"5"}]
+finalData = [{"Address":"7380 S Rainbow Blvd, Ste 101","Business Id":"IhNASEZ3XnBHmuuVnWdIwA","Category":"All","City":"Las Vegas","Name":"Brew Tea Bar","Postal Code":"89139","State":"NV","Is category":"1","Latitude":"36.0542269","Longitude":"-115.2423924","Review Count":"1338","Review Stars Count":"1338","Stars":"5"},{"Address":"3430 E Tropicana Ave, Ste 32","Business Id":"8fFTJBh0RB2EKG53ibiBKw","Category":"All","City":"Las Vegas","Name":"Zenaida's Cafe","Postal Code":"89121","State":"NV","Is category":"1","Latitude":"36.1017406138","Longitude":"-115.1003590417","Review Count":"347","Review Stars Count":"347","Stars":"5"},{"Address":"3899 Spring Mountain Rd","Business Id":"3pSUr_cdrphurO6m1HMP9A","Category":"All","City":"Las Vegas","Name":"J Karaoke Bar","Postal Code":"89102","State":"NV","Is category":"1","Latitude":"36.1261962","Longitude":"-115.1917155","Review Count":"344","Review Stars Count":"344","Stars":"5"},{"Address":"3455 S Durango Dr, Ste 112","Business Id":"2B46bRpDh49eDyjXGhL_ZQ","Category":"All","City":"Las Vegas","Name":"La Maison de Maggie","Postal Code":"89117","State":"NV","Is category":"1","Latitude":"36.1271566","Longitude":"-115.2800102","Review Count":"320","Review Stars Count":"320","Stars":"5"},{"Address":"3957 S Maryland Pkwy","Business Id":"cePE3rCuUOVSCCAHSjWxoQ","Category":"All","City":"Las Vegas","Name":"Karved","Postal Code":"89119","State":"NV","Is category":"1","Latitude":"36.117091","Longitude":"-115.138401","Review Count":"217","Review Stars Count":"217","Stars":"5"},{"Address":"5900 W Charleston Blvd, Ste 10","Business Id":"vOMDU31gdylrzBhAKC9QbA","Category":"All","City":"Las Vegas","Name":"Sushi Hiroyoshi Japanese Cuisine","Postal Code":"89146","State":"NV","Is category":"1","Latitude":"36.1599423","Longitude":"-115.2222337","Review Count":"213","Review Stars Count":"213","Stars":"5"},{"Address":"1615 S Las Vegas Blvd","Business Id":"G4hjhtA_wQ-tSOGpgGlDjw","Category":"All","City":"Las Vegas","Name":"Bajamar Seafood & Tacos","Postal Code":"89104","State":"NV","Is category":"1","Latitude":"36.1517421042","Longitude":"-115.1518118808","Review Count":"197","Review Stars Count":"197","Stars":"5"},{"Address":"3635 Las Vegas Blvd S","Business Id":"iBPyahdJRP5y0t25fF2W9w","Category":"All","City":"Las Vegas","Name":"Lip Smacking Foodie Tours","Postal Code":"89109","State":"NV","Is category":"1","Latitude":"36.1145367627","Longitude":"-115.172678268","Review Count":"189","Review Stars Count":"189","Stars":"5"},{"Address":"4105 W Sahara Ave","Business Id":"4Pl-ziYL2oerGyIPlwVdmA","Category":"All","City":"Las Vegas","Name":"Chuchote Thai Bistro & Desserts","Postal Code":"89102","State":"NV","Is category":"1","Latitude":"36.1439688","Longitude":"-115.1959097","Review Count":"166","Review Stars Count":"166","Stars":"5"},{"Address":"3616 West Spring Mountain Rd, Ste 103","Business Id":"9P23-V64kYz3trn9ecaJJA","Category":"All","City":"Las Vegas","Name":"Kame Omakase and Kaiseki","Postal Code":"89102","State":"NV","Is category":"1","Latitude":"36.1265556","Longitude":"-115.1892231","Review Count":"126","Review Stars Count":"126","Stars":"5"}]
 
 function FilterCategory(category, callback) {
   var sheet=viz.getWorkbook().getActiveSheet().getWorksheets().get("Map");
-  sheet.applyFilterAsync("Categories", category, tableau.FilterUpdateType.REPLACE);
+  sheet.clearFilterAsync('Business Id');
+  sheet.applyFilterAsync("Category", category, tableau.FilterUpdateType.REPLACE);
   callback()
 }
 
@@ -78,20 +83,89 @@ document.getElementById('category').onchange = function() {
   // update();
 }
 
-function update() {
-  document.getElementById('name1').innerHTML = finalData[0]['Name'];
-  document.getElementById('name2').innerHTML = finalData[1]['Name'];
-  document.getElementById('name3').innerHTML = finalData[2]['Name'];
-  document.getElementById('name4').innerHTML = finalData[3]['Name'];
-  document.getElementById('name5').innerHTML = finalData[4]['Name'];
-
-  document.getElementById('stars1').innerHTML = "Stars: " + finalData[0]['Stars'];
-  document.getElementById('stars2').innerHTML = "Stars: " + finalData[1]['Stars'];
-  document.getElementById('stars3').innerHTML = "Stars: " + finalData[2]['Stars'];
-  document.getElementById('stars4').innerHTML = "Stars: " + finalData[3]['Stars'];
-  document.getElementById('stars5').innerHTML = "Stars: " + finalData[4]['Stars'];
+function FilterName(Name) {
+  var sheet=viz.getWorkbook().getActiveSheet().getWorksheets().get("Map");
+  sheet.applyFilterAsync("Business Id", Name, tableau.FilterUpdateType.REPLACE);
 }
 
+function update() {
+  star = '<span class="fa fa-star checked"></span>'
+
+  document.getElementById('name1').innerHTML = "";
+  document.getElementById('name2').innerHTML = "";
+  document.getElementById('name3').innerHTML = "";
+  document.getElementById('name4').innerHTML = "";
+  document.getElementById('name5').innerHTML = "";
+
+  document.getElementById('stars1').innerHTML = "";
+  document.getElementById('stars2').innerHTML = "";
+  document.getElementById('stars3').innerHTML = "";
+  document.getElementById('stars4').innerHTML = "";
+  document.getElementById('stars5').innerHTML = "";
+
+  document.getElementById('num_reviews1').innerHTML = "";
+  document.getElementById('num_reviews2').innerHTML = "";
+  document.getElementById('num_reviews3').innerHTML = "";
+  document.getElementById('num_reviews4').innerHTML = "";
+  document.getElementById('num_reviews5').innerHTML = "";
+
+
+  name1 = finalData[0]['Name']
+  id1 = finalData[0]['Business Id']
+  document.getElementById('name1').innerHTML = name1;
+  document.getElementById('name1').onclick = function() {FilterName(id1);};
+  document.getElementById('stars1').innerHTML = finalData[0]['Stars'] + star;
+  document.getElementById('num_reviews1').innerHTML = "(" + finalData[0]['Review Count'] + " Reviews)";
+
+  name2 = finalData[1]['Name']
+  id2 = finalData[1]['Business Id']
+  document.getElementById('name2').innerHTML = name2;
+  document.getElementById('name2').onclick = function() {FilterName(id2);};
+  document.getElementById('stars2').innerHTML = finalData[1]['Stars'] + star;
+  document.getElementById('num_reviews2').innerHTML = "(" + finalData[1]['Review Count'] + " Reviews)";
+
+  name3 = finalData[2]['Name']
+  id3 = finalData[2]['Business Id']
+  document.getElementById('name3').innerHTML = name3;
+  document.getElementById('name3').onclick = function() {FilterName(id3);};
+  document.getElementById('stars3').innerHTML = finalData[2]['Stars'] + star;
+  document.getElementById('num_reviews3').innerHTML = "(" + finalData[2]['Review Count'] + " Reviews)";
+
+  name4 = finalData[3]['Name']
+  id4 = finalData[3]['Business Id']
+  document.getElementById('name4').innerHTML = name4;
+  document.getElementById('name4').onclick = function() {FilterName(id4);};
+  document.getElementById('stars4').innerHTML = finalData[3]['Stars'] + star;
+  document.getElementById('num_reviews4').innerHTML = "(" + finalData[3]['Review Count'] + " Reviews)";
+
+  name5 = finalData[4]['Name']
+  id5 = finalData[4]['Business Id']
+  document.getElementById('name5').innerHTML = name5;
+  document.getElementById('name5').onclick = function() {FilterName(id5);};
+  document.getElementById('stars5').innerHTML = finalData[4]['Stars'] + star;
+  document.getElementById('num_reviews5').innerHTML = "(" + finalData[4]['Review Count'] + " Reviews)";  
+}
+
+var select = document.getElementById("category"); 
+var options = ["All","Afghan","African","Arabian","Argentine","Armenian","Asian Fusion","Brazilian","British","Caribbean","Chinese","Cuban","Eritrean","Ethiopian","Filipino","French","German","Greek","Halal","Hawaiian","Himalayan/Nepalese","Honduran","Indian","Irish","Italian","Japanese","Korean","Laotian","Latin American","Malaysian","Mediterranean","Mexican","Middle Eastern","Modern European","Mongolian","Moroccan","Nicaraguan","Pakistani","Persian/Iranian","Peruvian","Portuguese","Singaporean","Spanish","Taiwanese","Thai","Turkish","Ukrainian","Vietnamese"]; 
+
+for(var i = 0; i < options.length; i++) {
+    var opt = options[i];
+    var el = document.createElement("option");
+    el.textContent = opt;
+    el.value = opt;
+    select.appendChild(el);
+}
+
+// function listenToMarksSelection() {
+//   viz.addEventListener(tableau.TableauEventName.MARKS_SELECTION, onMarksSelection);
+// }
+
+// function onMarksSelection(marksEvent) {
+//   return marksEvent.getMarksAsync().then(function() {
+//     getVizData(update)
+//   });
+// }
 
 var Loading = document.body;
 Loading.onload=function(){
