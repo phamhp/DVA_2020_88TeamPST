@@ -178,7 +178,13 @@ function Selection(n, id) {
 
 function update() {
   star = '<span class="fa fa-star checked"></span>'
-  document.getElementById('heading').innerHTML = "Top Hidden Gems";
+
+  if (vizDisplay == 0) {
+    document.getElementById('heading').innerHTML = "Top Hidden Gems";
+  } else {
+    document.getElementById('heading').innerHTML = "Top Restaurants";
+  }
+
   clearList()
 
 
@@ -256,7 +262,7 @@ function hiddenGems(){
 
 document.getElementById('hidden gems').onchange = function() {
   hiddenGems()
-}
+};
 
 // function listenToMarksSelection() {
 //   viz.addEventListener(tableau.TableauEventName.MARKS_SELECTION, onMarksSelection);
