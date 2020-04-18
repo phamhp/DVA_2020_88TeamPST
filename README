@@ -1,3 +1,5 @@
+It is where the files hosted on Heroku cloud so people can visit the website everywhere online.
+To experiment the webserver locally. 
 - Install:
 ++ virtualenv for python.
 ++ pip install -r requirement
