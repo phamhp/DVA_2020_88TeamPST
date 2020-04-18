@@ -179,7 +179,7 @@ function Selection(n, id) {
 function update() {
   star = '<span class="fa fa-star checked"></span>'
 
-  if (vizDisplay == 0) {
+  if (vizDisplay == 1) {
     document.getElementById('heading').innerHTML = "Top Hidden Gems";
   } else {
     document.getElementById('heading').innerHTML = "Top Restaurants";
