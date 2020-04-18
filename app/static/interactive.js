@@ -53,7 +53,7 @@ function getVizData(callback) {
       callback();
     }); 
 
-}
+};
 
 function formatData(cols,data) {
   var colNames = $.map(cols, function(col) { return col.getFieldName(); });
@@ -63,7 +63,7 @@ function formatData(cols,data) {
                   }, {});
                 });
   return finalData;
-}
+};
 
 function cleanData(table) {
 	var columns = table.getColumns();
@@ -72,6 +72,64 @@ function cleanData(table) {
     return obj2.Stars - obj1.Stars || obj2['Review Count'] - obj1['Review Count'];
   })
 };
+
+// count of hidden gems
+
+function getVizDataHG() {
+  console.log("getVizDataHG")
+	options = {
+		maxRows: 200, // Max rows to return. Use 0 to return all rows
+		ignoreAliases: false,
+		ignoreSelection: true,
+		includeAllColumns: false
+	};
+  
+  if (vizDisplay == 1) {
+    sheet2 = viz.getWorkbook().getActiveSheet().getWorksheets().get("HiddenGems");
+
+	// sheet = viz.getWorkbook().getActiveSheet();
+	sheet2.getUnderlyingDataAsync(options).then(function (t) {
+      cleanDataHG(t);
+    }).then(function(){if (HGcount == 0) {
+      clearList();
+      document.getElementById('heading').innerHTML = "No Hidden Gems";
+    } else {
+      getVizData(update);
+    }
+  }); 
+  } else {
+    getVizData(update);
+  }
+};
+
+function cleanDataHG(table) {
+	var columns = table.getColumns();
+	var data = table.getData();	
+  HGcount = formatData(columns, data).length
+};
+
+// if count is zero, clear list
+function clearList() {
+  document.getElementById('name1').innerHTML = "";
+  document.getElementById('name2').innerHTML = "";
+  document.getElementById('name3').innerHTML = "";
+  document.getElementById('name4').innerHTML = "";
+  document.getElementById('name5').innerHTML = "";
+
+  document.getElementById('stars1').innerHTML = "";
+  document.getElementById('stars2').innerHTML = "";
+  document.getElementById('stars3').innerHTML = "";
+  document.getElementById('stars4').innerHTML = "";
+  document.getElementById('stars5').innerHTML = "";
+
+  document.getElementById('num_reviews1').innerHTML = "";
+  document.getElementById('num_reviews2').innerHTML = "";
+  document.getElementById('num_reviews3').innerHTML = "";
+  document.getElementById('num_reviews4').innerHTML = "";
+  document.getElementById('num_reviews5').innerHTML = "";
+}
+
+
 
 // starting data
 finalData = [{"Address":"7380 S Rainbow Blvd, Ste 101","Business Id":"IhNASEZ3XnBHmuuVnWdIwA","Category":"All","City":"Las Vegas","Name":"Brew Tea Bar test","Postal Code":"89139","State":"NV","Is category":"1","Latitude":"36.0542269","Longitude":"-115.2423924","Review Count":"1338","Review Stars Count":"1338","Stars":"5"},{"Address":"3430 E Tropicana Ave, Ste 32","Business Id":"8fFTJBh0RB2EKG53ibiBKw","Category":"All","City":"Las Vegas","Name":"Zenaida's Cafe","Postal Code":"89121","State":"NV","Is category":"1","Latitude":"36.1017406138","Longitude":"-115.1003590417","Review Count":"347","Review Stars Count":"347","Stars":"5"},{"Address":"3899 Spring Mountain Rd","Business Id":"3pSUr_cdrphurO6m1HMP9A","Category":"All","City":"Las Vegas","Name":"J Karaoke Bar","Postal Code":"89102","State":"NV","Is category":"1","Latitude":"36.1261962","Longitude":"-115.1917155","Review Count":"344","Review Stars Count":"344","Stars":"5"},{"Address":"3455 S Durango Dr, Ste 112","Business Id":"2B46bRpDh49eDyjXGhL_ZQ","Category":"All","City":"Las Vegas","Name":"La Maison de Maggie","Postal Code":"89117","State":"NV","Is category":"1","Latitude":"36.1271566","Longitude":"-115.2800102","Review Count":"320","Review Stars Count":"320","Stars":"5"},{"Address":"3957 S Maryland Pkwy","Business Id":"cePE3rCuUOVSCCAHSjWxoQ","Category":"All","City":"Las Vegas","Name":"Karved","Postal Code":"89119","State":"NV","Is category":"1","Latitude":"36.117091","Longitude":"-115.138401","Review Count":"217","Review Stars Count":"217","Stars":"5"},{"Address":"5900 W Charleston Blvd, Ste 10","Business Id":"vOMDU31gdylrzBhAKC9QbA","Category":"All","City":"Las Vegas","Name":"Sushi Hiroyoshi Japanese Cuisine","Postal Code":"89146","State":"NV","Is category":"1","Latitude":"36.1599423","Longitude":"-115.2222337","Review Count":"213","Review Stars Count":"213","Stars":"5"},{"Address":"1615 S Las Vegas Blvd","Business Id":"G4hjhtA_wQ-tSOGpgGlDjw","Category":"All","City":"Las Vegas","Name":"Bajamar Seafood & Tacos","Postal Code":"89104","State":"NV","Is category":"1","Latitude":"36.1517421042","Longitude":"-115.1518118808","Review Count":"197","Review Stars Count":"197","Stars":"5"},{"Address":"3635 Las Vegas Blvd S","Business Id":"iBPyahdJRP5y0t25fF2W9w","Category":"All","City":"Las Vegas","Name":"Lip Smacking Foodie Tours","Postal Code":"89109","State":"NV","Is category":"1","Latitude":"36.1145367627","Longitude":"-115.172678268","Review Count":"189","Review Stars Count":"189","Stars":"5"},{"Address":"4105 W Sahara Ave","Business Id":"4Pl-ziYL2oerGyIPlwVdmA","Category":"All","City":"Las Vegas","Name":"Chuchote Thai Bistro & Desserts","Postal Code":"89102","State":"NV","Is category":"1","Latitude":"36.1439688","Longitude":"-115.1959097","Review Count":"166","Review Stars Count":"166","Stars":"5"},{"Address":"3616 West Spring Mountain Rd, Ste 103","Business Id":"9P23-V64kYz3trn9ecaJJA","Category":"All","City":"Las Vegas","Name":"Kame Omakase and Kaiseki","Postal Code":"89102","State":"NV","Is category":"1","Latitude":"36.1265556","Longitude":"-115.1892231","Review Count":"126","Review Stars Count":"126","Stars":"5"}]
@@ -90,8 +148,7 @@ function FilterCategory(category, callback) {
 
 document.getElementById('category').onchange = function() {
   category = document.getElementById('category').value
-  FilterCategory(category, getVizData);
-  getVizData(update);
+  FilterCategory(category, getVizDataHG);
   // update();
 }
 
@@ -122,23 +179,13 @@ function Selection(n, id) {
 function update() {
   star = '<span class="fa fa-star checked"></span>'
 
-  document.getElementById('name1').innerHTML = "";
-  document.getElementById('name2').innerHTML = "";
-  document.getElementById('name3').innerHTML = "";
-  document.getElementById('name4').innerHTML = "";
-  document.getElementById('name5').innerHTML = "";
+  if (vizDisplay == 1) {
+    document.getElementById('heading').innerHTML = "Top Hidden Gems";
+  } else {
+    document.getElementById('heading').innerHTML = "Top Restaurants";
+  }
 
-  document.getElementById('stars1').innerHTML = "";
-  document.getElementById('stars2').innerHTML = "";
-  document.getElementById('stars3').innerHTML = "";
-  document.getElementById('stars4').innerHTML = "";
-  document.getElementById('stars5').innerHTML = "";
-
-  document.getElementById('num_reviews1').innerHTML = "";
-  document.getElementById('num_reviews2').innerHTML = "";
-  document.getElementById('num_reviews3').innerHTML = "";
-  document.getElementById('num_reviews4').innerHTML = "";
-  document.getElementById('num_reviews5').innerHTML = "";
+  clearList()
 
 
   name1 = finalData[0]['Name']
@@ -215,7 +262,7 @@ function hiddenGems(){
 
 document.getElementById('hidden gems').onchange = function() {
   hiddenGems()
-}
+};
 
 // function listenToMarksSelection() {
 //   viz.addEventListener(tableau.TableauEventName.MARKS_SELECTION, onMarksSelection);
@@ -229,9 +276,17 @@ document.getElementById('hidden gems').onchange = function() {
 
 function done() {
   console.log("done")
-}
+};
+
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+};
+
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+};
 
 var Loading = document.body;
 Loading.onload=function(){
   createViz(1);
-}
+};
