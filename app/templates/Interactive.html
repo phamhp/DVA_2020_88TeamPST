@@ -39,17 +39,20 @@
         .checked {
         color: orange;
         }
+
         .switch {
         position: relative;
         display: inline-block;
         width: 58px;
         height: 32px;
         }
+
         .switch input { 
         opacity: 0;
         width: 0;
         height: 0;
         }
+
         .slider {
         position: absolute;
         cursor: pointer;
@@ -61,6 +64,7 @@
         -webkit-transition: .4s;
         transition: .4s;
         }
+
         .slider:before {
         position: absolute;
         content: "";
@@ -72,21 +76,26 @@
         -webkit-transition: .4s;
         transition: .4s;
         }
+
         input:checked + .slider {
         background-color: #50C878;
         }
+
         input:focus + .slider {
-        box-shadow: 0 0 1px #50C878;
+        box-shadow: 0 0 1px #59a253;
         }
+
         input:checked + .slider:before {
         -webkit-transform: translateX(25px);
         -ms-transform: translateX(25px);
         transform: translateX(25px);
         }
+
         /* Rounded sliders */
         .slider.round {
         border-radius: 30px;
         }
+
         .slider.round:before {
         border-radius: 50%;
         }
@@ -117,7 +126,7 @@
 
     <h5 class="w3-bar-item"><b>View Hidden Gems</b></h5>
     <label class="switch">
-        <input type="checkbox">
+        <input type="checkbox" id = "hidden gems" checked>
         <span class="slider round"></span>
     </label>
     <p style="font-size: smaller; padding-left: 5px; padding-right: 5px;">Hidden Gems are restaurants that traditional rating scales undervalue. Our advanced rating system has identified these restaurants as having much higher quality than their traditional rating.</p></center>
@@ -129,7 +138,7 @@
     <div class="w3-main" style="margin-left:250px; margin-top:50px">
     <div id="tableau-container" class="container" style="width:1200px; height:700px;">
         <div id = 'dataTarget'>
-            <h1 class="w3-text-teal">Top Restaurants</h1>
+            <h1 class="w3-text-teal" id="heading">Top Hidden Gems</h1>
             <p><span class = "business" id="name1"></span><br>
                 <span class = "stars" id="stars1"></span>
 
@@ -175,6 +184,6 @@
 </div>
 </div>
 
-    <script type="text/javascript" src={{url_for('static', filename='interactive.js')}}></script>
+<script type="text/javascript" src={{url_for('static', filename='interactive.js')}}></script>
 
 </body>
