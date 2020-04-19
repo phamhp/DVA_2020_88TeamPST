@@ -6,8 +6,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Adjusted Ratings</title>
-    <!-- <link rel="stylesheet" type="text/css" href="style.css"></link>
-     -->
+
 <head>
     <style>
         .selector {
@@ -99,6 +98,14 @@
         .slider.round:before {
         border-radius: 50%;
         }
+
+        .green{
+            color: #59a253
+        }
+
+        .blue{
+            color: #2a5783
+        }
     </style>
 
 
@@ -138,52 +145,49 @@
     <div class="w3-main" style="margin-left:250px; margin-top:50px">
     <div id="tableau-container" class="container" style="width:1200px; height:700px;">
         <div id = 'dataTarget'>
-            <h1 class="w3-text-teal" id="heading">Top Hidden Gems</h1>
+            <h1 class="green" id="heading">Top Hidden Gems</h1>
             <p><span class = "business" id="name1"></span><br>
                 <span class = "stars" id="stars1"></span>
-
-                <span id="num_reviews1"></span>
+                <span id="num_reviews1"></span><br>
+                <span id="detail1"></span>
             </p>
 
             <p>
             <span class = "business" id="name2"></span><br>
             <span class = "stars" id="stars2"></span>
-            
-            <span id="num_reviews2"></span>
+            <span id="num_reviews2"></span><br>
+            <span id="detail2"></span>
             </p>    
 
             <p>
             <span class = "business" id="name3"></span><br>
             <span class = "stars" id="stars3"></span>
-            
-            <span id="num_reviews3"></span>
+            <span id="num_reviews3"></span><br>
+            <span id="detail3"></span>
             </p>
 
             <p>
             <span class = "business" id="name4"></span><br>
             <span class = "stars" id="stars4"></span>
-            
-            <span id="num_reviews4"></span>
+            <span id="num_reviews4"></span><br>
+            <span id="detail4"></span>
             </p>
             
             <p>
             <span class = "business" id="name5"></span><br>
             <span class = "stars" id="stars5"></span>
-            
-            <span id="num_reviews5"></span>
+            <span id="num_reviews5"></span><br>
+            <span id="detail5"></span>
             </p>
 
         </div>
         <div id="vizContainer"></div>
         <br>
         <br>
-        <!-- <p style="padding-left: 10px;" class="source-dashboard">Source: <br><br>
-        Note:
-        </p> -->
     
 </div>
 </div>
 
-<script type="text/javascript" src={{url_for('static', filename='interactive.js')}}></script>
+    <script type="text/javascript" src={{url_for('static', filename='interactive.js')}}></script>
 
 </body>

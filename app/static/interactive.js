@@ -1,12 +1,3 @@
-// //set margins
-// var margin = {top: 75, right: 150, bottom: 75, left: 150},
-//     width = window.innerWidth - margin.left - margin.right,
-//     height = window.innerHeight - margin.top - margin.bottom;
-
-// document.getElementById("vizContainer").width = width;
-// document.getElementById("vizContainer").height = height;
-
-
 var vizList = ["https://public.tableau.com/views/TallTableHiddenGems/Dashboard1?:display_count=y&publish=yes&:origin=viz_share_link&:toolbar=no",
 "https://public.tableau.com/views/TallTableHiddenGems/Dashboard2?:display_count=y&publish=yes&:origin=viz_share_link&:toolbar=no"];
 
@@ -47,7 +38,6 @@ function getVizData(callback) {
     sheet2 = viz.getWorkbook().getActiveSheet().getWorksheets().get("TopHG");
   }
 
-	// sheet = viz.getWorkbook().getActiveSheet();
 	sheet2.getUnderlyingDataAsync(options).then(function (t) {
       cleanData(t);
       callback();
@@ -87,7 +77,7 @@ function getVizDataHG() {
   if (vizDisplay == 1) {
     sheet2 = viz.getWorkbook().getActiveSheet().getWorksheets().get("HiddenGems");
 
-	// sheet = viz.getWorkbook().getActiveSheet();
+
 	sheet2.getUnderlyingDataAsync(options).then(function (t) {
       cleanDataHG(t);
     }).then(function(){if (HGcount == 0) {
@@ -127,6 +117,12 @@ function clearList() {
   document.getElementById('num_reviews3').innerHTML = "";
   document.getElementById('num_reviews4').innerHTML = "";
   document.getElementById('num_reviews5').innerHTML = "";
+
+  document.getElementById('detail1').innerHTML = "";
+  document.getElementById('detail2').innerHTML = "";
+  document.getElementById('detail3').innerHTML = "";
+  document.getElementById('detail4').innerHTML = "";
+  document.getElementById('detail5').innerHTML = "";
 }
 
 
@@ -149,7 +145,6 @@ function FilterCategory(category, callback) {
 document.getElementById('category').onchange = function() {
   category = document.getElementById('category').value
   FilterCategory(category, getVizDataHG);
-  // update();
 }
 
 function FilterName(Name) {
@@ -163,6 +158,8 @@ function FilterName(Name) {
 
 
 function Selection(n, id) {
+  lookup = "detail".concat(n);
+  old_lookup = "detail".concat(id_selected);
   if (id_selected == n) {
     if (vizDisplay == 0) {
       sheet=viz.getWorkbook().getActiveSheet().getWorksheets().get("Map");
@@ -170,9 +167,18 @@ function Selection(n, id) {
       sheet=viz.getWorkbook().getActiveSheet().getWorksheets().get("MapHG");
     }
     sheet.clearFilterAsync('Business Id');
+    document.getElementById(lookup).innerHTML = "";
+    id_selected = 0;
   } else {
+    if (id_selected != 0) { document.getElementById(old_lookup).innerHTML = ""; };
     id_selected = n;
     FilterName(id);
+    half_break = '<br style="line-height: 10px" />';
+    addr = finalData[n]['Address'];
+    city = finalData[n]['City'];
+    state = finalData[n]['State'];
+    zip = finalData[n]['Postal Code'];
+    document.getElementById(lookup).innerHTML = half_break + addr + ",<br>" + city.concat(", ", state, ", ", zip);
   }
 }
 
@@ -240,12 +246,6 @@ for(var i = 0; i < options.length; i++) {
     select.appendChild(el);
 }
 
-// function reload() {
-//     // category = document.getElementById('category').value;
-//     getVizData();
-//     document.getElementById('category').value = "All"
-//     // getVizData(update);
-// }
 
 function hiddenGems(){
   if (vizDisplay == 0) {
@@ -259,20 +259,20 @@ function hiddenGems(){
   document.getElementById('category').value = "All"
   }
 
+function changeFontColor(){
+  if (vizDisplay == 1) {
+    document.getElementById('heading').classList.add("green");
+    document.getElementById('heading').classList.remove("blue");
+  } else {
+    document.getElementById('heading').classList.add("blue");
+    document.getElementById('heading').classList.remove("green");
+  }
+}
 
 document.getElementById('hidden gems').onchange = function() {
-  hiddenGems()
+  hiddenGems();
+  changeFontColor();
 };
-
-// function listenToMarksSelection() {
-//   viz.addEventListener(tableau.TableauEventName.MARKS_SELECTION, onMarksSelection);
-// }
-
-// function onMarksSelection(marksEvent) {
-//   return marksEvent.getMarksAsync().then(function() {
-//     getVizData(update)
-//   });
-// }
 
 function done() {
   console.log("done")
