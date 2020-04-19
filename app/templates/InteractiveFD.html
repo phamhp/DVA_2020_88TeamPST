@@ -1,0 +1,197 @@
+<html class="html" lang="en-US"><head>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    <!-- The theme is from W3 School-->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Adjusted Ratings</title>
+
+<head>
+    <style>
+        .selector {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 12px;
+            text-align: left;
+            float: left;
+            font-weight: lighter;
+        }
+        #vizContainer {
+            width: 700px;
+            height: 700px;
+            float: left;
+        }
+        #dataTarget {
+            width: 300px;
+            height: 700px;
+            float: left;
+        }
+        .business {
+            font-size:19px;
+            font-weight: bold;
+            cursor:pointer;
+        }
+        .stars {
+            font-size:16px;
+            
+        }
+        .checked {
+        color: orange;
+        }
+
+        .switch {
+        position: relative;
+        display: inline-block;
+        width: 58px;
+        height: 32px;
+        }
+
+        .switch input { 
+        opacity: 0;
+        width: 0;
+        height: 0;
+        }
+
+        .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+        }
+
+        .slider:before {
+        position: absolute;
+        content: "";
+        height: 25px;
+        width: 25px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+        }
+
+        input:checked + .slider {
+        background-color: #e15759;
+        }
+
+        input:focus + .slider {
+        box-shadow: 0 0 1px #e15759;
+        }
+
+        input:checked + .slider:before {
+        -webkit-transform: translateX(25px);
+        -ms-transform: translateX(25px);
+        transform: translateX(25px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+        border-radius: 30px;
+        }
+
+        .slider.round:before {
+        border-radius: 50%;
+        }
+
+        .green{
+            color: #59a253
+        }
+
+        .blue{
+            color: #2a5783
+        }
+        
+        .red{
+            color: #e15759
+        }
+    </style>
+
+
+    <script type="text/javascript" src="https://public.tableau.com/javascripts/api/tableau-2.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<body>
+    
+<!-- Navbar -->
+<div class="w3-top">
+    <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
+      <a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1" href="javascript:void(0)" onclick="w3_open()"><i class="fa fa-bars"></i></a>
+      <a href="#" class="w3-bar-item w3-button w3-theme-l1">Main Page</a>
+      <a href="about.html" class="w3-bar-item w3-button w3-hide-small w3-hover-white">About</a>
+    </div>
+  </div>
+<!-- Sidebar -->
+<nav class="w3-sidebar w3-bar-block w3-collapse w3-large w3-theme-l5 w3-animate-left" id="mySidebar">
+    <a href="javascript:void(0)" onclick="w3_close()" class="w3-right w3-xlarge w3-padding-large w3-hover-black w3-hide-large" title="Close Menu">
+      <i class="fa fa-remove"></i>
+    </a>
+    <h4 class="w3-bar-item"><b>Select a Category</b></h4>
+        <center><select id='category' style="font-size:12px;width:150px"></select>
+
+    <h5 class="w3-bar-item"><b>View Flawed Diamonds</b></h5>
+    <label class="switch">
+        <input type="checkbox" id = "hidden gems" checked>
+        <span class="slider round"></span>
+    </label>
+    <p style="font-size: smaller; padding-left: 5px; padding-right: 5px;">Flawed Diamonds are restaurants that traditional rating scales overvalue. Our advanced rating system has identified these restaurants as having much lower quality than their traditional rating.</p></center>
+  </nav>
+    <!-- Overlay effect when opening sidebar on small screens -->
+    <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+    <!-- Main Class -->
+    <div class="w3-main" style="margin-left:250px; margin-top:50px">
+    <div id="tableau-container" class="container" style="width:1200px; height:700px;">
+        <div id = 'dataTarget'>
+            <h1 class="red" id="heading">Flawed Diamonds</h1>
+            <p><span class = "business" id="name1"></span><br>
+                <span class = "stars" id="stars1"></span>
+                <span id="num_reviews1"></span><br>
+                <span id="detail1"></span>
+            </p>
+
+            <p>
+            <span class = "business" id="name2"></span><br>
+            <span class = "stars" id="stars2"></span>
+            <span id="num_reviews2"></span><br>
+            <span id="detail2"></span>
+            </p>    
+
+            <p>
+            <span class = "business" id="name3"></span><br>
+            <span class = "stars" id="stars3"></span>
+            <span id="num_reviews3"></span><br>
+            <span id="detail3"></span>
+            </p>
+
+            <p>
+            <span class = "business" id="name4"></span><br>
+            <span class = "stars" id="stars4"></span>
+            <span id="num_reviews4"></span><br>
+            <span id="detail4"></span>
+            </p>
+            
+            <p>
+            <span class = "business" id="name5"></span><br>
+            <span class = "stars" id="stars5"></span>
+            <span id="num_reviews5"></span><br>
+            <span id="detail5"></span>
+            </p>
+
+        </div>
+        <div id="vizContainer"></div>
+        <br>
+        <br>
+    
+</div>
+</div>
+
+    <script type="text/javascript" src="interactiveFD.js"></script>
+
+</body>
